@@ -1,8 +1,10 @@
-﻿namespace TemporalTables.Types;
+﻿using TemporalTables.Model;
+
+namespace TemporalTables.Types;
 
 [QueryType]
 public static class Query
 {
     public static Book GetBook()
-        => new Book("C# in depth.", new Author("Jon Skeet"));
+        => Book.Create("C# in depth.", Author.Create("Jon Skeet"));
 }
