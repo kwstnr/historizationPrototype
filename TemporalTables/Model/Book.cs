@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TemporalTables.Model;
 
 public sealed class Book
 {
+    [Key]
+    public Guid Id { get; init; }
     public string Title { get; private set; }
     public Author Author { get; private set; }
+    public Guid AuthorId { get; private set; }
 
     private Book()
     {
