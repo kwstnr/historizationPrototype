@@ -1,7 +1,7 @@
 using TemporalTables.Model;
 using TemporalTables.Services;
 
-namespace TemporalTables.Types;
+namespace TemporalTables.Types.Mutations;
 
 [MutationType]
 public static class AuthorMutations
