@@ -17,4 +17,15 @@ public sealed class BookService(TemporalTablesDbContext context)
         await context.SaveChangesAsync(ct);
         return book;
     }
+    
+    public async Task<Book> UpdateBookTitleAsync(Guid bookId, string title, CancellationToken ct)
+    {
+        var book = await context.Books.FindAsync(bookId);
+        if (book == null)
+            throw new ArgumentNullException($"Book with id {bookId} not found");
+        
+        book.Title = title;
+        await context.SaveChangesAsync(ct);
+        return book;
+    }
 }
