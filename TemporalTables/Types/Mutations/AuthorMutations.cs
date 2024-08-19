@@ -13,4 +13,8 @@ public static class AuthorMutations
         await authorService.CreateAuthorAsync(author, cancellationToken);
         return author;
     }
+    
+    public static async Task<Author> UpdateAuthorAsync(Guid authorId, string name, [Service] AuthorService authorService,
+        CancellationToken cancellationToken)
+        => await authorService.UpdateAuthorAsync(name, authorId, cancellationToken);
 }

@@ -12,4 +12,18 @@ public sealed class AuthorService(TemporalTablesDbContext context)
         context.Authors.Add(author);
         await context.SaveChangesAsync(ct);
     }
+    
+    public async Task<Author> UpdateAuthorAsync(
+        string name, 
+        Guid authorId, 
+        CancellationToken ct = default)
+    {
+        var author = await context.Authors.FindAsync(authorId);
+        if (author == null)
+            throw new ArgumentNullException($"Author with id {authorId} not found");
+        
+        author.Name = name;
+        await context.SaveChangesAsync(ct);
+        return author;
+    }
 }
