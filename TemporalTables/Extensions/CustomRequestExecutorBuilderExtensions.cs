@@ -7,5 +7,6 @@ public static class CustomRequestExecutorBuilderExtensions
     public static IRequestExecutorBuilder AddGraphQLConventions(this IRequestExecutorBuilder builder)
     => builder
             .AddFiltering()
-            .AddProjections();
+            .AddProjections()
+            .AddSorting();
 }
