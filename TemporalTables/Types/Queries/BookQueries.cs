@@ -1,4 +1,3 @@
-using HotChocolate.Data;
 using TemporalTables.Model;
 using TemporalTables.Services;
 
@@ -13,6 +12,7 @@ public static class BookQueries
         [Service] BookService bookService)
         => bookService.GetBookById(id);
 
+    [UsePaging]
     [UseProjection]
     public static IQueryable<Book> GetBooks([Service] BookService bookService) => bookService.GetBooks();
 }

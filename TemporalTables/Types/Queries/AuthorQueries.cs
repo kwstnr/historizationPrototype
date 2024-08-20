@@ -11,6 +11,7 @@ public static class AuthorQueries
     public static IQueryable<Author?> GetAuthorById(Guid id, [Service] AuthorService authorService) =>
         authorService.GetAuthorById(id);
     
+    [UsePaging]
     [UseProjection]
     public static IQueryable<Author> GetAuthors([Service] AuthorService authorService) =>
         authorService.GetAuthors();
