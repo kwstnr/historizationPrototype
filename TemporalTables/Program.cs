@@ -8,11 +8,14 @@ builder.Services
     .AddDbContextPool<TemporalTablesDbContext>(
         o => o.UseSqlServer(builder.Configuration.GetConnectionString("CatalogDB")));
 
-builder.Services.AddScoped<AuthorService>();
+builder.Services
+    .AddScoped<AuthorService>()
+    .AddScoped<BookService>();
 
 builder.Services
     .AddGraphQLServer()
-    .AddTypes();
+    .AddTypes()
+    .AddProjections();
 
 var app = builder.Build();
 

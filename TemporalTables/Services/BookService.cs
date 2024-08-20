@@ -28,4 +28,9 @@ public sealed class BookService(TemporalTablesDbContext context)
         await context.SaveChangesAsync(ct);
         return book;
     }
+    
+    public IQueryable<Book?> GetBookById(Guid id)
+    {
+        return context.Books.Where(b => b.Id == id);
+    }
 }

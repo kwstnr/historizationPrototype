@@ -5,6 +5,8 @@ namespace TemporalTables.Services;
 
 public sealed class AuthorService(TemporalTablesDbContext context)
 {
+    public IQueryable<Author?> GetAuthorById(Guid id) => context.Authors.Where(a => a.Id == id);
+    
     public async Task CreateAuthorAsync(
         Author author, 
         CancellationToken ct = default)
