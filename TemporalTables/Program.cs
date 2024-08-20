@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddDbContextPool<TemporalTablesDbContext>(
-        o => o.UseNpgsql(builder.Configuration.GetConnectionString("CatalogDB")));
+        o => o.UseSqlServer(builder.Configuration.GetConnectionString("CatalogDB")));
 
 builder.Services.AddScoped<AuthorService>();
 
