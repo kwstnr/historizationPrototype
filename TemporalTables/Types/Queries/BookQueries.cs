@@ -1,6 +1,7 @@
+using HotChocolate.Pagination;
+using HotChocolate.Types.Pagination;
 using TemporalTables.Model;
 using TemporalTables.Services;
-using TemporalTables.Types.Sorting;
 
 namespace TemporalTables.Types.Queries;
 
@@ -15,7 +16,13 @@ public static class BookQueries
 
     [UsePaging]
     [UseProjection]
-    [UseFiltering]
-    [UseSorting]
-    public static IQueryable<Book> GetBooks([Service] BookService bookService) => bookService.GetBooks();
+    public static async Task<Connection<Book>> GetBooksCursorBased(
+        PagingArguments pagingArguments,
+        [Service] BookService bookService,
+        CancellationToken cancellationToken) 
+        => await bookService.GetBooks(pagingArguments , cancellationToken).ToConnectionAsync();
+    
+    public static async Task<IQueryable<Book>> GetBooks(
+        [Service] BookService bookService)
+        => bookService.GetBooks();
 }
