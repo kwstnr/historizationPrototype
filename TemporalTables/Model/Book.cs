@@ -7,21 +7,10 @@ public sealed class Book
     [Key]
     public Guid Id { get; init; }
     public string Title { get; set; }
-    public Author Author { get; private set; }
-    public Guid AuthorId { get; private set; }
+    public Author Author { get; internal set; }
+    public Guid AuthorId { get; internal set; }
 
-    private Book()
+    internal Book()
     {
-    }
-
-    private Book(string title, Author author)
-    {
-        Title = title;
-        Author = author;
-    }
-
-    public static Book Create(string title, Author author)
-    {
-        return new Book(title, author);
     }
 };

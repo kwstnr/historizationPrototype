@@ -1,3 +1,4 @@
+using TemporalTables.Builder;
 using TemporalTables.Data;
 using TemporalTables.Model;
 
@@ -14,7 +15,10 @@ public sealed class BookService(TemporalTablesDbContext context)
         if (author == null)
             throw new ArgumentNullException($"Author with id {authorId} not found");
         
-        var book = Book.Create(title, author);
+        var book = new BookBuilder()
+            .Title(title)
+            .Author(author)
+            .Build();
         context.Books.Add(book);
         await context.SaveChangesAsync(ct);
         return book;
