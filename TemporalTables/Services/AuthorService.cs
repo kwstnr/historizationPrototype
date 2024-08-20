@@ -1,3 +1,4 @@
+using TemporalTables.Builder;
 using TemporalTables.Data;
 using TemporalTables.Model;
 
@@ -8,12 +9,14 @@ public sealed class AuthorService(TemporalTablesDbContext context)
     public IQueryable<Author?> GetAuthorById(Guid id) => context.Authors.Where(a => a.Id == id);
     public IQueryable<Author> GetAuthors() => context.Authors;
     
-    public async Task CreateAuthorAsync(
-        Author author, 
+    public async Task<Author> CreateAuthorAsync(
+        string name, 
         CancellationToken ct = default)
     {
+        var author = new AuthorBuilder().Name(name).Build();
         context.Authors.Add(author);
         await context.SaveChangesAsync(ct);
+        return author;
     }
     
     public async Task<Author> UpdateAuthorAsync(

@@ -8,11 +8,7 @@ public static class AuthorMutations
 {
     public static async Task<Author> CreateAuthorAsync(string name, [Service] AuthorService authorService,
         CancellationToken cancellationToken)
-    {
-        var author = Author.Create(name);
-        await authorService.CreateAuthorAsync(author, cancellationToken);
-        return author;
-    }
+        => await authorService.CreateAuthorAsync(name, cancellationToken);
     
     public static async Task<Author> UpdateAuthorAsync(Guid authorId, string name, [Service] AuthorService authorService,
         CancellationToken cancellationToken)

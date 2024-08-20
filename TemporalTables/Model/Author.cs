@@ -10,17 +10,7 @@ public sealed class Author
     public string Name { get; set; }
     public ICollection<Book> Books { get; set; }
     
-    private Author()
+    internal Author()
     {
-    }
-    
-    private Author(string name)
-    {
-        Name = name;
-    }
-    
-    public static Author Create(string name)
-    {
-        return new Author(name);
     }
 }
