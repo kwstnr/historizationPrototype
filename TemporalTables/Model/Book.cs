@@ -9,6 +9,8 @@ public sealed class Book
     public string Title { get; set; }
     public Author Author { get; internal set; }
     public Guid AuthorId { get; internal set; }
+    public DateTimeOffset PublishedAt { get; set; }
+    public float Price { get; set; }
 
     internal Book()
     {

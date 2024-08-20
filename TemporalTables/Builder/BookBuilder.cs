@@ -7,6 +7,8 @@ public class BookBuilder
     private string _title;
     private Author _author;
     private Guid _authorId;
+    private DateTimeOffset _publishedAt;
+    private float _price;
 
     public BookBuilder Title(string title)
     {
@@ -25,6 +27,18 @@ public class BookBuilder
         _authorId = authorId;
         return this;
     }
+    
+    public BookBuilder PublishedAt(DateTimeOffset publishedAt)
+    {
+        _publishedAt = publishedAt;
+        return this;
+    }
+    
+    public BookBuilder Price(float price)
+    {
+        _price = price;
+        return this;
+    }
 
     public Book Build()
     {
@@ -32,7 +46,9 @@ public class BookBuilder
         {
             Title = _title,
             Author = _author,
-            AuthorId = _authorId
+            AuthorId = _authorId,
+            PublishedAt = _publishedAt,
+            Price = _price
         };
     }
 }
