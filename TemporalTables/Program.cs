@@ -1,10 +1,7 @@
-using HotChocolate.Data.Filters;
 using Microsoft.EntityFrameworkCore;
 using TemporalTables.Data;
 using TemporalTables.Extensions;
 using TemporalTables.Services;
-using TemporalTables.Types.FilterInputs;
-using TemporalTables.Types.Sorting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +15,7 @@ builder.Services
 
 builder.Services
     .AddGraphQLServer()
-    .AddTypes()
-    .AddType<BookFilterInputType>()
-    .AddType<AuthorFilterInputType>()
-    .AddType<BookSortInputType>()
-    .AddType<AuthorSortInputType>()
+    .AddTemporalTables()
     .AddGraphQLConventions();
 
 var app = builder.Build();
