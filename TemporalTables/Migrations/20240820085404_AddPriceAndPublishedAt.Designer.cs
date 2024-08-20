@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TemporalTables.Data;
 
@@ -11,9 +12,11 @@ using TemporalTables.Data;
 namespace TemporalTables.Migrations
 {
     [DbContext(typeof(TemporalTablesDbContext))]
-    partial class TemporalTablesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820085404_AddPriceAndPublishedAt")]
+    partial class AddPriceAndPublishedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

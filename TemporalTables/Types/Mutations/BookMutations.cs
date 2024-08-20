@@ -10,11 +10,22 @@ public static class BookMutations
         CancellationToken cancellationToken)
         => await bookService.CreateBookAsync(title, authorId, publishedAt, price, cancellationToken);
 
-    public static async Task<Book> UpdateBookTitleAsync(Guid bookId, string title, [Service] BookService bookService,
+    public static async Task<Book> UpdateBookTitleAsync(Guid id, string title, [Service] BookService bookService,
         CancellationToken cancellationToken)
-        => await bookService.UpdateBookTitleAsync(bookId, title, cancellationToken);
+        => await bookService.UpdateBookTitleAsync(id, title, cancellationToken);
 
-    public static async Task<Book> UpdateBookPriceAsync(Guid bookId, float price, [Service] BookService bookService,
+    public static async Task<Book> UpdateBookPriceAsync(Guid id, float price, [Service] BookService bookService,
         CancellationToken cancellationToken)
-        => await bookService.UpdateBookPriceAsync(bookId, price, cancellationToken);
+        => await bookService.UpdateBookPriceAsync(id, price, cancellationToken);
+
+    public static async Task<DeletionResponse> DeleteBookAsync(Guid id, [Service] BookService bookService,
+        CancellationToken cancellationToken)
+    {
+        var success = await bookService.DeleteBookAsync(id, cancellationToken);
+        return new DeletionResponse
+        {
+            Success = success,
+            Message = success ? "Book deleted successfully" : $"Book with id {id} not found"
+        };
+    }
 }
