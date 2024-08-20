@@ -5,6 +5,8 @@ namespace TemporalTables.Services;
 
 public sealed class BookService(TemporalTablesDbContext context)
 {
+    public IQueryable<Book?> GetBookById(Guid id) => context.Books.Where(b => b.Id == id);
+    public IQueryable<Book> GetBooks() => context.Books;
     
     public async Task<Book> CreateBookAsync(string title, Guid authorId, CancellationToken ct)
     {
@@ -27,10 +29,5 @@ public sealed class BookService(TemporalTablesDbContext context)
         book.Title = title;
         await context.SaveChangesAsync(ct);
         return book;
-    }
-    
-    public IQueryable<Book?> GetBookById(Guid id)
-    {
-        return context.Books.Where(b => b.Id == id);
     }
 }

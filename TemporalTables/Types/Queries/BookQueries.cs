@@ -12,4 +12,7 @@ public static class BookQueries
     public static IQueryable<Book?> GetBookById(Guid id,
         [Service] BookService bookService)
         => bookService.GetBookById(id);
+
+    [UseProjection]
+    public static IQueryable<Book> GetBooks([Service] BookService bookService) => bookService.GetBooks();
 }

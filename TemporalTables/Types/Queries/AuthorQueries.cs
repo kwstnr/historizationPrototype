@@ -7,6 +7,11 @@ namespace TemporalTables.Types.Queries;
 public static class AuthorQueries
 {
     [UseFirstOrDefault]
+    [UseProjection]
     public static IQueryable<Author?> GetAuthorById(Guid id, [Service] AuthorService authorService) =>
         authorService.GetAuthorById(id);
+    
+    [UseProjection]
+    public static IQueryable<Author> GetAuthors([Service] AuthorService authorService) =>
+        authorService.GetAuthors();
 }
