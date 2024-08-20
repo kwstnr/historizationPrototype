@@ -1,5 +1,6 @@
 using TemporalTables.Model;
 using TemporalTables.Services;
+using TemporalTables.Types.Sorting;
 
 namespace TemporalTables.Types.Queries;
 

@@ -4,6 +4,7 @@ using TemporalTables.Data;
 using TemporalTables.Extensions;
 using TemporalTables.Services;
 using TemporalTables.Types.FilterInputs;
+using TemporalTables.Types.Sorting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services
     .AddTypes()
     .AddType<BookFilterInputType>()
     .AddType<AuthorFilterInputType>()
+    .AddType<BookSortInputType>()
     .AddGraphQLConventions();
 
 var app = builder.Build();
