@@ -13,3 +13,12 @@ public class BookSortInputType : SortInputType<Book>
         descriptor.Field(b => b.Price);
     }
 }
+
+public class AuthorSortInputType : SortInputType<Author>
+{
+    protected override void Configure(ISortInputTypeDescriptor<Author> descriptor)
+    {
+        descriptor.BindFieldsExplicitly();
+        descriptor.Field(a => a.Name);
+    }
+}

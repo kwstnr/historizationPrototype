@@ -22,6 +22,7 @@ builder.Services
     .AddType<BookFilterInputType>()
     .AddType<AuthorFilterInputType>()
     .AddType<BookSortInputType>()
+    .AddType<AuthorSortInputType>()
     .AddGraphQLConventions();
 
 var app = builder.Build();
