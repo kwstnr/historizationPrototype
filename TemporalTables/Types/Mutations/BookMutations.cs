@@ -1,5 +1,6 @@
 using TemporalTables.Model;
 using TemporalTables.Services;
+using TemporalTables.Types.Nodes;
 
 namespace TemporalTables.Types.Mutations;
 

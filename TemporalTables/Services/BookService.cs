@@ -1,4 +1,4 @@
-using HotChocolate.Pagination;
+using Microsoft.EntityFrameworkCore;
 using TemporalTables.Builder;
 using TemporalTables.Data;
 using TemporalTables.Model;
@@ -7,10 +7,7 @@ namespace TemporalTables.Services;
 
 public sealed class BookService(TemporalTablesDbContext context)
 {
-    public IQueryable<Book?> GetBookById(Guid id) => context.Books.Where(b => b.Id == id);
-    
-    public async Task<Page<Book>> GetBooks(PagingArguments pagingArguments, CancellationToken ct = default)
-        => await context.Books.OrderBy(b => b.Id).ToPageAsync(pagingArguments, ct);
+    public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await context.Books.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
     public IQueryable<Book> GetBooks() => context.Books;
     

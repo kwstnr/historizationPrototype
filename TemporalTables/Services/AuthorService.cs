@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TemporalTables.Builder;
 using TemporalTables.Data;
 using TemporalTables.Model;
@@ -7,6 +8,7 @@ namespace TemporalTables.Services;
 public sealed class AuthorService(TemporalTablesDbContext context)
 {
     public IQueryable<Author?> GetAuthorById(Guid id) => context.Authors.Where(a => a.Id == id);
+    public Task<Author?> GetAuthorByIdAsync(Guid id, CancellationToken cancellationToken) => context.Authors.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
     public IQueryable<Author> GetAuthors() => context.Authors;
     
     public async Task<Author> CreateAuthorAsync(

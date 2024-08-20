@@ -1,4 +1,4 @@
-namespace TemporalTables.Types.Mutations;
+namespace TemporalTables.Types.Nodes;
 
 public class DeletionResponse
 {
