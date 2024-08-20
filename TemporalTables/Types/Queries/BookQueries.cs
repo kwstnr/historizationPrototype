@@ -14,5 +14,6 @@ public static class BookQueries
 
     [UsePaging]
     [UseProjection]
+    [UseFiltering]
     public static IQueryable<Book> GetBooks([Service] BookService bookService) => bookService.GetBooks();
 }

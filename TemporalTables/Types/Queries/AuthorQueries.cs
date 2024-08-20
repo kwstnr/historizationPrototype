@@ -13,6 +13,7 @@ public static class AuthorQueries
     
     [UsePaging]
     [UseProjection]
+    [UseFiltering] 
     public static IQueryable<Author> GetAuthors([Service] AuthorService authorService) =>
         authorService.GetAuthors();
 }
