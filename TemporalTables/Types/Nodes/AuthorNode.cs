@@ -6,9 +6,10 @@ namespace TemporalTables.Types.Nodes;
 [ObjectType<Author>]
 public static partial class AuthorNode
 {
-    public static async Task<IReadOnlyList<Book>> GetBooksAsync(
+    [UsePaging]
+    public static async Task<IQueryable<Book>> GetBooksAsync(
         [Parent] Author author,
         BookService bookService,
         CancellationToken cancellationToken)
-        => await bookService.GetBooksByAuthorIdAsync(author.Id, cancellationToken);
+        => await bookService.GetBooksByAuthorId(author.Id, cancellationToken);
 }

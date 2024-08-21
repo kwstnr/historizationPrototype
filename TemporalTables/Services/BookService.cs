@@ -11,10 +11,8 @@ public sealed class BookService(TemporalTablesDbContext context, IBooksByAuthorI
     public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await context.Books.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
     public IQueryable<Book> GetBooks() => context.Books;
-
-    public async Task<IReadOnlyList<Book>>
-        GetBooksByAuthorIdAsync(Guid authorId, CancellationToken cancellationToken) =>
-        await booksByAuthorIdDataLoader.LoadAsync(authorId, cancellationToken);
+    
+    public async Task<IQueryable<Book>> GetBooksByAuthorId(Guid authorId, CancellationToken cancellationToken) => await booksByAuthorIdDataLoader.LoadAsync(authorId, cancellationToken);
     
     public async Task<Book> CreateBookAsync(string title, Guid authorId, DateTimeOffset publishedAt, float price, CancellationToken ct)
     {
