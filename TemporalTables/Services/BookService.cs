@@ -2,10 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using TemporalTables.Builder;
 using TemporalTables.Data;
 using TemporalTables.Model;
+using TemporalTables.Services.DataLoaders;
 
 namespace TemporalTables.Services;
 
-public sealed class BookService(TemporalTablesDbContext context)
+public sealed class BookService(TemporalTablesDbContext context, IBooksByAuthorIdDataLoader booksByAuthorIdDataLoader)
 {
     public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await context.Books.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
@@ -13,7 +14,7 @@ public sealed class BookService(TemporalTablesDbContext context)
 
     public async Task<IReadOnlyList<Book>>
         GetBooksByAuthorIdAsync(Guid authorId, CancellationToken cancellationToken) =>
-        await context.Books.Where(b => b.AuthorId == authorId).ToListAsync(cancellationToken);
+        await booksByAuthorIdDataLoader.LoadAsync(authorId, cancellationToken);
     
     public async Task<Book> CreateBookAsync(string title, Guid authorId, DateTimeOffset publishedAt, float price, CancellationToken ct)
     {
