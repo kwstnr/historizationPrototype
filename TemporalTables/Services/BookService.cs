@@ -30,6 +30,12 @@ public sealed class BookService(TemporalTablesDbContext context, IBooksByAuthorI
         await context.SaveChangesAsync(ct);
         return book;
     }
+
+    public async Task<IEnumerable<Book>> GetBookHistoryAsync(Guid bookId, CancellationToken cancellationToken) =>
+        await context.Books.TemporalAll()
+            .Where(b => b.Id == bookId)
+            .OrderBy(b => EF.Property<DateTime>(b, "PeriodStart"))
+            .ToListAsync(cancellationToken);
     
     public async Task<Book> UpdateBookTitleAsync(Guid bookId, string title, CancellationToken ct)
     {
