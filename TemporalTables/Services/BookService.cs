@@ -6,7 +6,10 @@ using TemporalTables.Services.DataLoaders;
 
 namespace TemporalTables.Services;
 
-public sealed class BookService(TemporalTablesDbContext context, IBooksByAuthorIdDataLoader booksByAuthorIdDataLoader)
+public sealed class BookService(
+    TemporalTablesDbContext context,
+    IBooksByAuthorIdDataLoader booksByAuthorIdDataLoader,
+    IBookHistoryByIdDataLoader bookHistoryByIdDataLoader)
 {
     public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await context.Books.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
@@ -32,10 +35,7 @@ public sealed class BookService(TemporalTablesDbContext context, IBooksByAuthorI
     }
 
     public async Task<IEnumerable<Book>> GetBookHistoryAsync(Guid bookId, CancellationToken cancellationToken) =>
-        await context.Books.TemporalAll()
-            .Where(b => b.Id == bookId)
-            .OrderBy(b => EF.Property<DateTime>(b, "PeriodStart"))
-            .ToListAsync(cancellationToken);
+        await bookHistoryByIdDataLoader.LoadAsync(bookId, cancellationToken);
     
     public async Task<Book> UpdateBookTitleAsync(Guid bookId, string title, CancellationToken ct)
     {

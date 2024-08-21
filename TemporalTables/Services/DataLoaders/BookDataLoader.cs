@@ -15,4 +15,17 @@ internal static class BookDataLoader
             .Where(b => keys.Contains(b.AuthorId))
             .GroupBy(b => b.AuthorId)
             .ToDictionaryAsync(g => g.Key, g => g.AsQueryable(), cancellationToken);
+
+    [DataLoader]
+    internal static async Task<Dictionary<Guid, List<Book>>> GetBookHistoryByIdAsync(
+        IReadOnlyList<Guid> keys,
+        TemporalTablesDbContext context,
+        CancellationToken cancellationToken)
+        => (await context.Books
+                .TemporalAll()
+                .Where(b => keys.Contains(b.Id))
+                .OrderBy(b => EF.Property<DateTime>(b, "PeriodStart"))
+                .ToListAsync(cancellationToken))
+            .GroupBy(b => b.Id)
+            .ToDictionary(g => g.Key, g => g.ToList());
 }
