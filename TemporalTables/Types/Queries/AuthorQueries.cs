@@ -6,13 +6,11 @@ namespace TemporalTables.Types.Queries;
 [QueryType]
 public static class AuthorQueries
 {
-    [UseFirstOrDefault]
-    [UseProjection]
-    public static IQueryable<Author?> GetAuthorById(Guid id, [Service] AuthorService authorService) =>
-        authorService.GetAuthorById(id);
+    public static async Task<Author?> GetAuthorById(Guid id, [Service] AuthorService authorService,
+        CancellationToken cancellationToken) =>
+        await authorService.GetAuthorByIdAsync(id, cancellationToken);
     
     [UsePaging]
-    [UseProjection]
     [UseFiltering]
     [UseSorting]
     public static IQueryable<Author> GetAuthors([Service] AuthorService authorService) =>
