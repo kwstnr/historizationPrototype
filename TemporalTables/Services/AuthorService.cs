@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using TemporalTables.Builder;
 using TemporalTables.Data;
+using TemporalTables.DataLoaders;
 using TemporalTables.Model;
 
 namespace TemporalTables.Services;
 
-public sealed class AuthorService(TemporalTablesDbContext context)
+public sealed class AuthorService(TemporalTablesDbContext context, AuthorByIdDataLoader authorByIdDataLoader)
 {
-    public Task<Author?> GetAuthorByIdAsync(Guid id, CancellationToken cancellationToken) => context.Authors.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
+    public async Task<Author?> GetAuthorByIdAsync(Guid id, CancellationToken cancellationToken) => await authorByIdDataLoader.LoadAsync(id, cancellationToken);
     public IQueryable<Author> GetAuthors() => context.Authors;
     
     public async Task<Author> CreateAuthorAsync(
