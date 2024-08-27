@@ -6,10 +6,11 @@ namespace TemporalTables.Types.Queries;
 [QueryType]
 public static class BookQueries
 {
-    public static async Task<Book?> GetBookById(Guid id,
-        [Service] BookService bookService,
-        CancellationToken cancellationToken)
-        => await bookService.GetBookByIdAsync(id, cancellationToken);
+    // [NodeResolver]
+    // public static async Task<Book?> GetBookByIdAsync(Guid id,
+    //     [Service] BookService bookService,
+    //     CancellationToken cancellationToken)
+    //     => await bookService.GetBookByIdAsync(id, cancellationToken);
     
     
     [UsePaging]

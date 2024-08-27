@@ -13,5 +13,6 @@ public static class TemporalTablesGraphQLConventions
             {
                 o.DefaultPageSize = 2;
                 o.RequirePagingBoundaries = false;
-            });
+            })
+            .AddGlobalObjectIdentification();
 }

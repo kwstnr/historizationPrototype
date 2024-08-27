@@ -22,4 +22,10 @@ public static partial class BookNode
         BookService bookService,
         CancellationToken cancellationToken)
         => await bookService.GetBookHistoryAsync(book.Id, cancellationToken);
+    
+    [NodeResolver]
+    public static async Task<Book?> GetBookByIdAsync(Guid id,
+        [Service] BookService bookService,
+        CancellationToken cancellationToken)
+        => await bookService.GetBookByIdAsync(id, cancellationToken);
 }
