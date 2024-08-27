@@ -9,9 +9,10 @@ namespace TemporalTables.Services;
 public sealed class BookService(
     TemporalTablesDbContext context,
     IBooksByAuthorIdDataLoader booksByAuthorIdDataLoader,
-    IBookHistoryByIdDataLoader bookHistoryByIdDataLoader)
+    IBookHistoryByIdDataLoader bookHistoryByIdDataLoader,
+    IBookByIdDataLoader bookByIdDataLoader)
 {
-    public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await context.Books.FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
+    public async Task<Book?> GetBookByIdAsync(Guid id, CancellationToken cancellationToken) => await bookByIdDataLoader.LoadAsync(id, cancellationToken);
 
     public IQueryable<Book> GetBooks() => context.Books;
     

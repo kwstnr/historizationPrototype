@@ -28,4 +28,13 @@ internal static class BookDataLoader
                 .ToListAsync(cancellationToken))
             .GroupBy(b => b.Id)
             .ToDictionary(g => g.Key, g => g.ToList());
+
+    [DataLoader]
+    internal static async Task<Dictionary<Guid, Book>> GetBookByIdAsync(
+        IReadOnlyList<Guid> keys,
+        TemporalTablesDbContext context,
+        CancellationToken cancellationToken)
+        => await context.Books
+            .Where(b => keys.Contains(b.Id))
+            .ToDictionaryAsync(b => b.Id, cancellationToken);
 }
