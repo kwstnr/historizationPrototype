@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '8.0.0' # Adjust the version according to your project
+          dotnet-version: '8.0.8' # Adjust the version according to your project
       
       # Install dependencies and build
       - name: Build the project
