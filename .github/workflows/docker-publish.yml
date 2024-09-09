@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - main
+      - release
 
 jobs:
   build:
@@ -23,10 +23,10 @@ jobs:
       # Build the project to ensure .NET is working properly
       - name: Build the project
         run: dotnet build ./TemporalTables --configuration Release
-      
-      # Publish the project
+
+      # Publish the project to a relative directory
       - name: Publish the project
-        run: dotnet publish ./TemporalTables --configuration Release --output /app/publish
+        run: dotnet publish ./TemporalTables --configuration Release --output ./publish
 
       # Setup Docker Buildx for multi-platform support
       - name: Set up Docker Buildx
@@ -46,4 +46,4 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             --push \
             -t ${{ secrets.DOCKER_USERNAME }}/historization-prototype:latest \
-            -f ./Dockerfile .  # Make sure it points to the right Dockerfile location
+            -f ./Dockerfile .
