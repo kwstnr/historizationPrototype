@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_DevOps", "_DevOps", "{B8D8DA94-2B9C-41A6-817A-99575FE44F3B}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Global
