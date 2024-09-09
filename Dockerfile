@@ -15,4 +15,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:5095
-ENTRYPOINT ["dotnet", "YourAppName.dll"]
+ENTRYPOINT ["dotnet", "HistorizationPrototype.dll"]

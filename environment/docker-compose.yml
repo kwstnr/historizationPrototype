@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  azuresqledge:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: azuresqledge
+    cap_add:
+      - SYS_PTRACE
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: mypassword_123
+    ports:
+      - "1433:1433"
+    volumes:
+      - azuresqledge_data:/var/opt/mssql
+  
+  # Backend service (API)
+  backend:
+    image: kevinwuestner/historization-prototype:latest
+    container_name: backend
+    ports:
+      - "5095:5095"
+    depends_on:
+      - azuresqledge
+    platform: linux/arm64
+
+volumes:
+  azuresqledge_data:

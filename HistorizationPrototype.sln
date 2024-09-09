@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_DevOps", "_DevOps", "{B8D8
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{62025A56-332F-40FC-A7B2-8003AB629044}"
+	ProjectSection(SolutionItems) = preProject
+		environment\docker-compose.yml = environment\docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
