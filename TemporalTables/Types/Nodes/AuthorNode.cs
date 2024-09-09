@@ -12,4 +12,10 @@ public static partial class AuthorNode
         BookService bookService,
         CancellationToken cancellationToken)
         => await bookService.GetBooksByAuthorId(author.Id, cancellationToken);
+    
+    [NodeResolver]
+    public static async Task<Author?> GetAuthorByIdAsync(Guid id,
+        [Service] AuthorService authorService,
+        CancellationToken cancellationToken)
+        => await authorService.GetAuthorByIdAsync(id, cancellationToken);
 }
