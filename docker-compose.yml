@@ -15,5 +15,4 @@ services:
       - azuresqledge_data:/var/opt/mssql
 
 volumes:
-  postgres_data:
   azuresqledge_data:
